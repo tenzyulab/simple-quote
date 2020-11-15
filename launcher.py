@@ -12,6 +12,7 @@ class MyBot(commands.Bot):
     def __init__(self, **options):
         super().__init__(command_prefix=commands.when_mentioned_or("/"), **options)
         print("Starting Simple Quote...")
+        self.remove_command("help")
 
         for cog in [cog.replace("/", ".").replace(".py", "") for cog in glob("cogs/*.py")]:
             try:
@@ -25,11 +26,8 @@ class MyBot(commands.Bot):
         print("logged in as:", str(user))
 
     async def on_command_error(self, ctx, error):
-        if isinstance(error, commands.CommandNotFound):
-            return
-        if isinstance(error, commands.BadArgument):
-            return
-        if isinstance(error, commands.CheckFailure):
+        ignore_error = (commands.CommandNotFound, commands.BadArgument, commands.CheckFailure)
+        if isinstance(error, ignore_error):
             return
         await ctx.send(error)
 

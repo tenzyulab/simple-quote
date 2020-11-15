@@ -31,8 +31,10 @@ class Mod(commands.Cog, command_attrs=dict(hidden=True)):
             if message.guild.id != int(match_url.group("guild_id")):
                 continue
             channel = self.bot.get_channel(int(match_url.group("channel_id")))
-            quoted_message = await channel.fetch_message(int(match_url.group("message_id")))
-            embed = await self.create_embed(quoted_message)
+            quoted = await channel.fetch_message(int(match_url.group("message_id")))
+            embed = await self.create_embed(quoted)
+            if quoted.attachments:
+                embed.set_image(url=quoted.attachments[0].url)
             await message.channel.send(embed=embed)
 
 
