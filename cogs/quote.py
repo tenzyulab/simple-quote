@@ -36,6 +36,9 @@ class Quote(commands.Cog, command_attrs=dict(hidden=True)):
             if quoted.attachments:
                 embed.set_image(url=quoted.attachments[0].url)
             await message.channel.send(embed=embed)
+            if quoted.embeds:
+                for quoted_embed in quoted.embeds:
+                    await message.channel.send(embed=quoted_embed)
 
 
 def setup(bot):
