@@ -4,7 +4,8 @@ import discord
 from discord.ext import commands
 
 pattern = re.compile(
-    r"(?<!<)https://(?:(ptb|canary)\.)?discord(app)?\.com/channels/(?P<guild_id>\d+)/(?P<channel_id>\d+)/(?P<message_id>\d+)/?(?!>)")
+    r"(?<!<)https://(?:(ptb|canary)\.)?discord(app)?\.com/channels/(?P<guild_id>\d+)/(?P<channel_id>\d+)/(?P<message_id>\d+)/?(?!>)"
+)
 
 
 class Quote(commands.Cog):
@@ -17,11 +18,10 @@ class Quote(commands.Cog):
 
     async def create_embed(self, message):
         author = message.author
-        embed = discord.Embed(description=message.content,
-                              timestamp=message.created_at)
-        embed.set_author(name=author.display_name,
-                         icon_url=author.avatar_url,
-                         url=message.jump_url)
+        embed = discord.Embed(description=message.content, timestamp=message.created_at)
+        embed.set_author(
+            name=author.display_name, icon_url=author.avatar_url, url=message.jump_url
+        )
         embed.set_footer(text="#" + message.channel.name)
         return embed
 
@@ -54,13 +54,14 @@ class Quote(commands.Cog):
                     fixed_file = await quoted.attachments[0].to_file(spoiler=True)
                 else:
                     embed.set_image(url=quoted.attachments[0].url)
-            
+
             await message.channel.send(embed=embed, file=fixed_file)
 
             # If embeds are also quoted
             if quoted.embeds:
                 await message.channel.send("──────────")
                 await self.send_copy_embeds(quoted.embeds, channel)
+
 
 def setup(bot):
     bot.add_cog(Quote(bot))
