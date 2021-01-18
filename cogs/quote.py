@@ -7,7 +7,7 @@ pattern = re.compile(
     r"(?<!<)https://(?:(ptb|canary)\.)?discord(app)?\.com/channels/(?P<guild_id>\d+)/(?P<channel_id>\d+)/(?P<message_id>\d+)/?(?!>)")
 
 
-class Mod(commands.Cog, command_attrs=dict(hidden=True)):
+class Quote(commands.Cog, command_attrs=dict(hidden=True)):
     def __init__(self, bot):
         self.bot = bot
 
@@ -39,4 +39,4 @@ class Mod(commands.Cog, command_attrs=dict(hidden=True)):
 
 
 def setup(bot):
-    bot.add_cog(Mod(bot))
+    bot.add_cog(Quote(bot))
