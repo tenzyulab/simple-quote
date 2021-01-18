@@ -38,7 +38,7 @@ class Quote(commands.Cog):
 
             # If only Embeds are quoted
             if len(quoted.content) == 0 and quoted.embeds:
-                await self.send_copy_embeds(quoted.embeds, channel)
+                await self.send_copy_embeds(quoted.embeds, message.channel)
                 continue
 
             # If quoted from NSFW to SFW
