@@ -60,7 +60,7 @@ class Quote(commands.Cog):
             # If embeds are also quoted
             if quoted.embeds:
                 await message.channel.send("──────────")
-                await self.send_copy_embeds(quoted.embeds, channel)
+                await self.send_copy_embeds(quoted.embeds, message.channel)
 
 
 def setup(bot):
