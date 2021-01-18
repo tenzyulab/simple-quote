@@ -4,6 +4,9 @@ from pathlib import Path
 from traceback import print_exc
 
 from discord.ext import commands
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class MyBot(commands.Bot):
