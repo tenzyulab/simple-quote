@@ -61,7 +61,7 @@ class Quote(commands.Cog):
                 icon_url=quoted.author.avatar_url,
                 url=quoted.jump_url,
             )
-
+            embed.set_footer(text="#" + quoted.channel.name)
             fixed_file = None
             if quoted.attachments:
                 if quoted.attachments[0].is_spoiler():
