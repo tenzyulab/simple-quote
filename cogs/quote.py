@@ -24,8 +24,11 @@ class Quote(commands.Cog):
         for match_url in pattern.finditer(message.content):
             if message.guild.id != int(match_url.group("guild_id")):
                 continue
+            try:
             channel = self.bot.get_channel(int(match_url.group("channel_id")))
             quoted = await channel.fetch_message(int(match_url.group("message_id")))
+            except:
+                continue
 
             # If quoted from NSFW to SFW
             if channel.is_nsfw() and not message.channel.is_nsfw():
