@@ -21,12 +21,16 @@ class Quote(commands.Cog):
         if message.author.bot:
             return
 
+        temp_urls = []
         for match_url in pattern.finditer(message.content):
+            if match_url.group() in temp_urls:
+                continue
+            temp_urls.append(match_url.group())
             if message.guild.id != int(match_url.group("guild_id")):
                 continue
             try:
-            channel = self.bot.get_channel(int(match_url.group("channel_id")))
-            quoted = await channel.fetch_message(int(match_url.group("message_id")))
+                channel = self.bot.get_channel(int(match_url.group("channel_id")))
+                quoted = await channel.fetch_message(int(match_url.group("message_id")))
             except:
                 continue
 
