@@ -1,33 +1,33 @@
 # Simple Quote
 
-> Simple Quote allows you to quote messages in a better way
+> Simple Quote は Discord のメッセージの引用をサポートする bot です。
 
 > ## **[✉️ Click To Invite !](https://discord.com/api/oauth2/authorize?client_id=754704180022870076&permissions=117760&scope=bot)**
 
 
-## How to use
+## 使い方
 
-Simply include the URL of the message you want to quote in your outgoing message.
+メッセージに引用したいメッセージのURLを含めるだけです。
 
-If you don't want to expand the embed, just enclose the URL in `<` `>` as in the standard feature.
+埋め込みリンクを展開したくない場合は、標準機能と同様にURLを `< >` で囲んでください。
 
-### Required Permissions
+### 必要な権限
 
 - View Channels
-- Send Messages
-- Embed Links
-- Attach Files
-- Read Messages History
+- Send Messages (メッセージを送信)
+- Embed Link (埋め込みリンク)
+- Attach Files (ファイルを添付)
+- Read Messages History (メッセージ履歴を読む)
 
 <hr />
 
-If you have a **unresolved or new problem**, please open an **Issue** or send a direct message to **[Twitter](https://twitter.com/tenzyumasuda)**. Feel free to do so!
+**解決しない or 新しい問題** があれば **Issue** を立てるか、**[Twitter](https://twitter.com/tenzyumasuda)** にダイレクトメッセージを送ってください。気軽にどうぞ！
 
 <br />
 
 <br />
 
-<p align="center">©️ 2020 Tenzyu Masuda</p>
+<p align="center">©️ 2020 - 2021 Tenzyu Masuda</p>
 
 <br />
 
