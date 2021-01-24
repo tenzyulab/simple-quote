@@ -37,9 +37,9 @@ class Quote(commands.Cog):
             # If quoted from NSFW to SFW
             if channel.is_nsfw() and not message.channel.is_nsfw():
                 embed = discord.Embed(
-                    title="**Quoted from NSFW**",
+                    title="**NSFWからの引用**",
                     url=quoted.jump_url,
-                    description="click to view messageUrl",
+                    description="messageUrlをクリックして表示",
                     timestamp=quoted.created_at,
                 )
                 embed.set_footer(text="#NSFW")

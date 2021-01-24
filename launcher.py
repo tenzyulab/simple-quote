@@ -12,18 +12,18 @@ load_dotenv()
 class MyBot(commands.Bot):
     def __init__(self, **options):
         super().__init__(command_prefix=commands.when_mentioned_or("/"), **options)
-        print("Starting Simple Quote...")
+        print("Simple Quoteを起動します。")
         self.remove_command("help")
 
         for cog in Path("cogs/").glob("*.py"):
             try:
                 self.load_extension("cogs." + cog.stem)
-                print(f"Loaded {cog.stem}.py")
+                print(f"{cog.stem}.pyは正常にロードされました。")
             except:
                 print_exc()
 
     async def on_ready(self):
-        print("logged in as:", self.user.name, self.user.id)
+        print(self.user.name, self.user.id, "としてログインしました。")
 
     async def on_command_error(self, ctx, error):
         ignore_errors = (
