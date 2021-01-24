@@ -1,4 +1,3 @@
-import glob
 from os import getenv
 from pathlib import Path
 from traceback import print_exc
@@ -10,8 +9,8 @@ load_dotenv()
 
 
 class MyBot(commands.Bot):
-    def __init__(self, **options):
-        super().__init__(command_prefix=commands.when_mentioned_or("/"), **options)
+    def __init__(self):
+        super().__init__(command_prefix=commands.when_mentioned_or("/"))
         print("Simple Quoteを起動します。")
         self.remove_command("help")
 
