@@ -2,6 +2,7 @@ from os import getenv
 from pathlib import Path
 from traceback import print_exc
 
+from discord import Game
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -23,6 +24,8 @@ class MyBot(commands.Bot):
 
     async def on_ready(self):
         print(self.user.name, self.user.id, "としてログインしました。")
+        activity = Game(name="/help または @Simple Quote help")
+        await self.change_presence(activity=activity)
 
     async def on_command_error(self, ctx, error):
         ignore_errors = (
