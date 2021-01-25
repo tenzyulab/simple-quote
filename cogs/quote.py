@@ -51,9 +51,17 @@ class Quote(commands.Cog):
                 if quoted.attachments:
                     if quoted.attachments[0].is_spoiler():
                         fixed_file = await quoted.attachments[0].to_file(spoiler=True)
-                        await message.channel.send(file=fixed_file)
+                        msg = f"{quoted.author.mention} {quoted.channel.mention}"
+                        await message.channel.send(msg, file=fixed_file)
                     else:
-                        embed = discord.Embed()
+                        embed = discord.Embed(
+                            timestamp=quoted.created_at,
+                        )
+                        embed.set_author(
+                            name=quoted.author.display_name,
+                            icon_url=quoted.author.avatar_url,
+                        )
+                        embed.set_footer(text="#" + quoted.channel.name)
                         embed.set_image(url=quoted.attachments[0].url)
                         await message.channel.send(embed=embed)
                 if quoted.embeds:
