@@ -48,9 +48,7 @@ class Quote(commands.Cog):
 
             # If no messages
             if len(quoted.content) == 0:
-                msg = f"{quoted.author.mention} {quoted.channel.mention}"
                 if quoted.attachments:
-
                     if quoted.attachments[0].is_spoiler():
                         fixed_file = await quoted.attachments[0].to_file(spoiler=True)
                         await message.channel.send(file=fixed_file)
@@ -69,8 +67,9 @@ class Quote(commands.Cog):
                         embed.set_image(url=quoted.attachments[0].url)
                         await message.channel.send(embed=embed)
                 if quoted.embeds:
-                    await message.channel.send(msg)
                     await self.send_copied_embeds(quoted.embeds, message.channel)
+                msg = f"引用元: {quoted.author.mention} {quoted.channel.mention}"
+                await message.channel.send(msg)
                 continue
 
             embed = discord.Embed(
