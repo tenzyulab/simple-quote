@@ -1,7 +1,7 @@
 from pathlib import Path
 from traceback import print_exc
 
-from discord import Game
+from discord import AllowedMentions, Game
 from discord.ext.commands import (
     BadArgument,
     Bot,
@@ -15,7 +15,10 @@ import const
 
 class MyBot(Bot):
     def __init__(self):
-        super().__init__(command_prefix=when_mentioned_or(const.BOT_PREFIX))
+        super().__init__(
+            command_prefix=when_mentioned_or(const.BOT_PREFIX),
+            allowed_mentions=AllowedMentions.none(),
+        )
         print(f"{const.BOT_NAME} を起動します。")
         self.remove_command("help")
 
