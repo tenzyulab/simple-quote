@@ -1,37 +1,41 @@
-from os import getenv
 from pathlib import Path
 from traceback import print_exc
 
 from discord import Game
-from discord.ext import commands
-from dotenv import load_dotenv
+from discord.ext.commands import (
+    BadArgument,
+    Bot,
+    CheckFailure,
+    CommandNotFound,
+    when_mentioned_or,
+)
 
-load_dotenv()
+import const
 
 
-class MyBot(commands.Bot):
+class MyBot(Bot):
     def __init__(self):
-        super().__init__(command_prefix=commands.when_mentioned_or("/"))
-        print("Simple Quoteを起動します。")
+        super().__init__(command_prefix=when_mentioned_or(const.BOT_PREFIX))
+        print(f"{const.BOT_NAME} を起動します。")
         self.remove_command("help")
 
         for cog in Path("cogs/").glob("*.py"):
             try:
                 self.load_extension("cogs." + cog.stem)
                 print(f"{cog.stem}.pyは正常にロードされました。")
-            except:
+            except Exception:
                 print_exc()
 
     async def on_ready(self):
-        print(self.user.name, self.user.id, "としてログインしました。")
+        print(f"{self.user} としてログインしました。")
         activity = Game(name="/help または @Simple Quote help")
         await self.change_presence(activity=activity)
 
     async def on_command_error(self, ctx, error):
         ignore_errors = (
-            commands.CommandNotFound,
-            commands.BadArgument,
-            commands.CheckFailure,
+            BadArgument,
+            CheckFailure,
+            CommandNotFound,
         )
         if isinstance(error, ignore_errors):
             return
@@ -40,4 +44,4 @@ class MyBot(commands.Bot):
 
 if __name__ == "__main__":
     bot = MyBot()
-    bot.run(getenv("DISCORD_BOT_TOKEN"))
+    bot.run(const.DISCORD_BOT_TOKEN)
