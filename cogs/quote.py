@@ -86,6 +86,8 @@ class Quote(commands.Cog):
             if quoted.attachments:
                 if quoted.attachments[0].is_spoiler():
                     fixed_file = await quoted.attachments[0].to_file(spoiler=True)
+                elif quoted.attachments[0].filename.endswith(".mov"):
+                    fixed_file = await quoted.attachments[0].to_file()
                 else:
                     embed.set_image(url=quoted.attachments[0].url)
 
