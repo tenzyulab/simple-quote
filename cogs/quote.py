@@ -52,7 +52,7 @@ class Quote(commands.Cog):
                     if quoted.attachments[0].is_spoiler():
                         fixed_file = await quoted.attachments[0].to_file(spoiler=True)
                         await message.channel.send(file=fixed_file)
-                    elif quoted.attachments[0].filename.endswith(".mov"):
+                    elif quoted.attachments[0].filename.endswith(".mov", ".mp4"):
                         fixed_file = await quoted.attachments[0].to_file()
                         await message.channel.send(file=fixed_file)
                     else:
