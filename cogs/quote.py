@@ -51,10 +51,16 @@ class Quote(commands.Cog):
                 if quoted.attachments:
                     if quoted.attachments[0].is_spoiler():
                         fixed_file = await quoted.attachments[0].to_file(spoiler=True)
-                        await message.channel.send(file=fixed_file)
+                        try:
+                            await message.channel.send(file=fixed_file)
+                        except Exception:
+                            await message.channel.send("引用できるファイルサイズは8MBまでです。")
                     elif quoted.attachments[0].filename.endswith((".mov", ".mp4")):
                         fixed_file = await quoted.attachments[0].to_file()
-                        await message.channel.send(file=fixed_file)
+                        try:
+                            await message.channel.send(file=fixed_file)
+                        except Exception:
+                            await message.channel.send("引用できるファイルサイズは8MBまでです。")
                     else:
                         embed = discord.Embed(
                             timestamp=quoted.created_at,
@@ -85,13 +91,16 @@ class Quote(commands.Cog):
             if quoted.attachments:
                 if quoted.attachments[0].is_spoiler():
                     fixed_file = await quoted.attachments[0].to_file(spoiler=True)
-                elif quoted.attachments[0].filename.endswith(".mov"):
+                elif quoted.attachments[0].filename.endswith((".mov", ".mp4")):
                     fixed_file = await quoted.attachments[0].to_file()
                 else:
                     embed.set_image(url=quoted.attachments[0].url)
-
-            await message.channel.send(embed=embed, file=fixed_file)
-
+            try:
+                await message.channel.send(embed=embed, file=fixed_file)
+            except Exception:
+                await message.channel.send(
+                    "引用できるファイルサイズは8MBまでです。", embed=embed
+                )
             if quoted.embeds:
                 await message.channel.send("────────")
                 await self.send_copied_embeds(quoted.embeds, message.channel)
