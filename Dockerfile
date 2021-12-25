@@ -1,4 +1,4 @@
-FROM python:3.10-alpine as build
+FROM python:3.10-slim as build
 WORKDIR /opt
 
 RUN python3 -m venv /venv
