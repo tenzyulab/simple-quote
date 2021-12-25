@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  simple-quote:
+    container_name: simple-quote
+    build: .
+    volumes:
+      - /home/deploy/simple-quote/.env:/opt/.env
+    restart: always
